@@ -59,7 +59,7 @@ class bdist_msi(distutils.command.bdist_msi.bdist_msi):
                         [("S_APP_%s" % index, executable.shortcutDir,
                                 executable.shortcutName, "TARGETDIR",
                                 "[TARGETDIR]%s" % baseName, None, None, None,
-                                None, None, None, None)])
+                                None, None, None, "TARGETDIR")])
         for tableName, data in self.data.items():
             msilib.add_data(self.db, tableName, data)
 
