@@ -1,6 +1,7 @@
 import os
 import sys
 import subprocess
+from security import safe_command
 
 class SetupWriter(object):
     bases = {
@@ -103,5 +104,5 @@ def main():
     print("Setup script written to %s; run it as:" % writer.setupFileName)
     print("    python %s build" % writer.setupFileName)
     if writer.GetBooleanValue("Run this now"):
-        subprocess.call(["python", writer.setupFileName, "build"])
+        safe_command.run(subprocess.call, ["python", writer.setupFileName, "build"])
 
