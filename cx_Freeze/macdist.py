@@ -219,8 +219,7 @@ class bdist_mac(Command):
                 return path
 
         # Last resort: fixed paths (macports)
-        for path in ['/opt/local/Library/Frameworks/QtGui.framework/Versions/'
-                     '4/Resources/qt_menu.nib']:
+        for path in ['/opt/local/Library/Frameworks/QtGui.framework/Versions/', '4/Resources/qt_menu.nib']:
             if os.path.exists(path):
                 return path
 
