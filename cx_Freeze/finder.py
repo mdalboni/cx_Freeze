@@ -253,9 +253,6 @@ class ModuleFinder(object):
                             # code.
                             if "." not in name:
                                 break
-
-                    else:
-                        continue
                     if name == "__init__":
                         continue
 
