@@ -61,7 +61,6 @@ class SetupWriter(object):
                 break
 
     def Write(self):
-        output = open(self.setupFileName, "w")
         w = lambda s: output.write(s + "\n")
 
         w("from cx_Freeze import setup, Executable")
