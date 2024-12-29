@@ -5,6 +5,7 @@ import stat
 import subprocess
 
 from cx_Freeze.common import normalize_to_list
+from security import safe_command
 
 __all__ = ["bdist_dmg", "bdist_mac"]
 
@@ -147,11 +148,11 @@ class bdist_mac(Command):
                 os.chmod(filePath, mode | stat.S_IWUSR)
 
             # let the file itself know its place
-            subprocess.call(('install_name_tool', '-id',
+            safe_command.run(subprocess.call, ('install_name_tool', '-id',
                              '@executable_path/' + fileName, filePath))
 
             # find the references: call otool -L on the file
-            otool = subprocess.Popen(('otool', '-L', filePath),
+            otool = safe_command.run(subprocess.Popen, ('otool', '-L', filePath),
                                      stdout=subprocess.PIPE)
             references = otool.stdout.readlines()[1:]
 
@@ -193,7 +194,7 @@ class bdist_mac(Command):
                 # if so, change the reference
                 if name in files:
                     newReference = '@executable_path/' + name
-                    subprocess.call(('install_name_tool', '-change',
+                    safe_command.run(subprocess.call, ('install_name_tool', '-change',
                                     referencedFile, newReference, filePath))
 
     def find_qt_menu_nib(self):
